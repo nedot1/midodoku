@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Neuer Schmerzeintrag</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-card>
+  <ion-card-content>
+    Geben Sie Schmerzort und Intensität an
+  </ion-card-content>
+  </ion-card>
+  <ion-item>
+  <ion-label>Datum und Zeit</ion-label>
+  <ion-datetime displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+</ion-item>
+<ion-list>
+  <ion-item>
+    <ion-label>Schmerzort</ion-label>
+    <ion-select [(ngModel)]="Schmerzort">
+      <ion-option value="Kopf">Kopf</ion-option>
+      <ion-option value="Nacken">Nacken</ion-option>
+      <ion-option value="Rücken">Rücken</ion-option>
+      <ion-option value="ArmRechts">Arm rechts</ion-option>
+      <ion-option value="ArmLinks">Arm links</ion-option>
+      <ion-option value="Brust">Brust</ion-option>
+      <ion-option value="Oberbauch">Oberbauch</ion-option>
+      <ion-option value="BeinRechts">Bein rechts</ion-option>
+      <ion-option value="BeinLinks">Bein links</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+<ion-item>
+  <ion-label>Schmerzart</ion-label>
+  <ion-select [(ngModel)]="toppings" multiple="true">
+    <ion-option>stechend</ion-option>
+    <ion-option>dumpf</ion-option>
+    <ion-option>brennend</ion-option>
+    <ion-option>klopfend</ion-option>
+    <ion-option>ziehend</ion-option>
+  </ion-select>
+</ion-item>
+  <p>Schmerzintensität</p>
+<ion-item>
+  <ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+    <ion-label range-left>0</ion-label>
+    <ion-label range-right>10</ion-label>
+  </ion-range>
+</ion-item>
+<button ion-button outline item-right icon-left>
+  <ion-icon name="close-circle"></ion-icon>
+  Abbrechen
+</button>
+<button ion-button outline item-right icon-left>
+  <ion-icon name="checkmark-circle"></ion-icon>
+  Speichern
+</button>
+</ion-content>
