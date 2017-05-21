@@ -5,8 +5,13 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button block>+ neuer Eintrag</button>
-  <button ion-button block>Übersicht</button>
-  <button ion-button block>Medikamente</button>
-  <button ion-button block>Statistik</button>
+  <button ion-button block (click)="pushPainDocPage()">
+    + neuer Eintrag
+  </button>
+  <button ion-button block>
+    Übersicht
+  </button>
+  <button ion-button block>
+    Statistik
+  </button>
 </ion-content>
