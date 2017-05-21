@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Neuer Eintrag</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<div>
+    Geben Sie eine Zahl an, die angibt, wie stark Ihre Schmerzen Sie in den vergangenen 24 Stunden beeiträchtigt haben.
+  </div>
+  <div><br/>
+    <ion-note id= itemOne>0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Keine Beeinträchtigung</ion-note><br/>
+    <ion-note id= itemTwo>1 - 3 &#09; = Leichte Beeinträchtigung</ion-note><br/>
+    <ion-note id= itemThree>4 - 6 = Mässige Beeinträchtigung</ion-note><br/>
+    <ion-note id= itemFour>7 - 9 = Starke Beeinträchtigung</ion-note><br/>
+    <ion-note id= itemFive>10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Vollständige Beeinträchtigung</ion-note><br/>
+  </div>
+
+<div>Allgemeine Aktivität<br/></div>
+<ion-item>
+  <ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+    <ion-label range-left>0</ion-label>
+    <ion-label range-right>10</ion-label>
+  </ion-range>
+</ion-item>
+
+<div>Stimmung<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<div>Gehvermögen<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<div>Normale Arbeit (sowohl ausserhalb des Hauses als auch Hausarbeit)<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<div>Beziehung zu anderen Menschen<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<div>Schlaf<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<div>Lebensfreude<br/>
+</div>
+<ion-item>
+<ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">
+  <ion-label range-left>0</ion-label>
+  <ion-label range-right>10</ion-label>
+</ion-range>
+</ion-item>
+
+<button ion-button (click)="pushHomePage()" outline item-right icon-left>
+  <ion-icon name="close-circle"></ion-icon>
+  Abbrechen
+</button>
+<button ion-button (click)="pushHomePage()" outline item-right icon-left>
+  <ion-icon name="checkmark-circle"></ion-icon>
+  Speichern
+</button>
+</ion-content>

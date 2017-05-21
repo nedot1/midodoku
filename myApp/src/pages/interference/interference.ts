@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
+import { PainDocPage} from '../paindoc/paindoc';
 import { HomePage} from '../home/home';
-import { InterferencePage} from '../interference/interference';
 
 
 @Component({
-  selector: 'page-paindoc',
-  templateUrl: 'paindoc.html'
+  selector: 'page-interference',
+  templateUrl: 'interference.html'
 })
-export class PainDocPage {
+export class InterferencePage {
 
 constructor(public navCtrl: NavController) {
 
   }
 
-  pushInterferencePage(){
-    this.navCtrl.push(InterferencePage);
-  }
-
   pushHomePage(){
     this.navCtrl.push(HomePage);
   }
+
 }
