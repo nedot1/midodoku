@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { PainDocPage} from '../paindoc/paindoc';
 import { OverviewPage} from '../overview/overview';
+import { StatisticPage} from '../statistic/statistic';
 
 @Component({
   selector: 'page-home',
@@ -19,6 +20,10 @@ export class HomePage {
 
   pushOverviewPage(){
     this.navCtrl.push(OverviewPage);
+  }
+
+  pushStatisticPage(){
+    this.navCtrl.push(StatisticPage);
   }
 
     }

@@ -6,9 +6,8 @@
 
 
 <ion-content padding>
-
 <div id="DateAndTime">
-    Geben Sie Schmerzort und Intensität an
+    Geben Sie den Ort, die Art und die Intensität der Schmerzen an
   </div>
   <ion-item>
   <ion-label>Datum und Zeit</ion-label>
@@ -45,12 +44,29 @@
     <ion-option>ziehend</ion-option>
   </ion-select>
 </ion-item>
-  <div id="painIntensity">Schmerzintensität><br/>
-    <ion-note id= itemOne>0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Keine Schmerzen</ion-note><br/>
-    <ion-note id= itemTwo>1 - 3 &#09; = Leichte Schmerzen </ion-note><br/>
-    <ion-note id= itemThree>4 - 6 = Mässige Schmerzen</ion-note><br/>
-    <ion-note id= itemFour>7 - 9 = Starke Schmerzen</ion-note><br/>
-    <ion-note id= itemFive>10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= Stärkster Schmerzen</ion-note><br/>
+  <div id="painIntensity">Schmerzintensität<br/>
+    <table id="tablePain">
+      <tr>
+      <td>Keine Schmerzen: </td>
+      <td>&nbsp;&nbsp;0</td>
+    </tr>
+    <tr>
+      <td>Leichte Schmerzen: </td>
+      <td>&nbsp;&nbsp;1 - 3</td>
+    </tr>
+    <tr>
+      <td>Mässige Schmerzen: </td>
+      <td>&nbsp;&nbsp;4 - 6</td>
+    </tr>
+    <tr>
+      <td>Starke Schmerzen: </td>
+      <td>&nbsp;&nbsp;7 - 9</td>
+    </tr>
+    <tr>
+      <td>Stärkste Schmerzen: </td>
+      <td>&nbsp;&nbsp;10</td>
+    </tr>
+    </table>
   </div>
 <ion-item>
   <ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="saturation" color="secondary">

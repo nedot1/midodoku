@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Profil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label stacked>Benutzername</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Passwort</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Vorname</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Nachname</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Geburtsdatum</ion-label>
+    <ion-datetime displayFormat="DD.MM.YYYY" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+  <button ion-button outline item-right icon-left>
+    <ion-icon name="checkmark-circle"></ion-icon>
+    Speichern
+  </button>
+</ion-content>

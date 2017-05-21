@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { InterferencePage } from '../pages/interference/interference';
 //import { LoginPage} from '..pages/login/login';
 import { OverviewPage} from '../pages/overview/overview';
 import { PainDocPage} from '../pages/paindoc/paindoc';
+import { ProfilPage} from '../pages/profil/profil';
+import { SettingsPage} from '../pages/settings/settings';
+import { StatisticPage} from '../pages/statistic/statistic';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -18,13 +19,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     InterferencePage,
     //LoginPage,
     OverviewPage,
     PainDocPage,
+    ProfilPage,
+    SettingsPage,
+    StatisticPage,
     TabsPage,
   ],
   imports: [
@@ -34,13 +36,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     InterferencePage,
     //LoginPage,
     OverviewPage,
     PainDocPage,
+    ProfilPage,
+    SettingsPage,
+    StatisticPage,
     TabsPage,
   ],
   providers: [
