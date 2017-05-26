@@ -5,20 +5,22 @@
 </ion-header>
 
 <ion-content padding>
+
+  <div *ngFor="let entry of entries">
   <ion-card-header id="header">
-    Eintrag vom 13.12.2016 13:00
+    Eintrag vom {{entry.date}}
   </ion-card-header>
   <ion-card-content id="content">
-  <table>
+  <table >
       <tr>
         <td>Schmerzort:</td>
-        <td>Fuss links</td>
+        <td>{{entry.painLocation}}</td>
       </tr>
         <td>Schmerzart:</td>
-        <td>stechend, ziehend</td>
+        <td>{{entry.painSensation}}</td>
       <tr>
         <td>Schmerzintensität:</td>
-        <td>5</td>
+        <td>&nbsp;{{entry.painValue}}</td>
       </tr>
       </table>
       <br/>
@@ -26,81 +28,33 @@
       <table>
       <tr>
         <td>...allgemeine Aktivität:</td>
-        <td>5</td>
+        <td>{{entry.activity}}</td>
       </tr>
       <tr>
         <td>...Stimmung:</td>
-        <td>5</td>
+        <td>{{entry.mood}}</td>
       </tr>
       <tr>
         <td>...Gehvermögen:</td>
-        <td>5</td>
+        <td>{{entry.walkingAbility}}</td>
       </tr>
       <tr>
         <td>...normale Arbeit:</td>
-        <td>5</td>
+        <td>{{entry.work}}</td>
       </tr>
       <tr>
         <td>...Beziehung zu anderen Menschen:</td>
-        <td>5</td>
+        <td>{{entry.socialLife}}</td>
       </tr>
       <tr>
         <td>...Schlaf:</td>
-        <td>5</td>
+        <td>{{entry.sleep}}</td>
       </tr>
       <tr>
         <td>...Lebensfreude:</td>
-        <td>5</td>
+        <td>{{entry.enjoyment}}</td>
       </tr>
     </table>
   </ion-card-content>
-  <ion-card-header id="header">
-    Eintrag vom 12.12.2016 10:00
-  </ion-card-header>
-  <ion-card-content id="content">
-  <table>
-      <tr>
-        <td>Schmerzort:</td>
-        <td>Fuss links</td>
-      </tr>
-        <td>Schmerzart:</td>
-        <td>stechend, ziehend</td>
-      <tr>
-        <td>Schmerzintensität:</td>
-        <td>5</td>
-      </tr>
-      </table>
-      <br/>
-      <div>Beeinträchtigung durch die Schmerzen auf...:</div>
-      <table>
-      <tr>
-        <td>...allgemeine Aktivität:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...Stimmung:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...Gehvermögen:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...normale Arbeit:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...Beziehung zu anderen Menschen:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...Schlaf:</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>...Lebensfreude:</td>
-        <td>5</td>
-      </tr>
-    </table>
-  </ion-card-content>
+</div>
 </ion-content>
