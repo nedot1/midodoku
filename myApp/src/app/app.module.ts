@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
 import { InterferencePage } from '../pages/interference/interference';
-//import { LoginPage} from '..pages/login/login';
+import { LoginPage} from '../pages/login/login';
 import { OverviewPage} from '../pages/overview/overview';
 import { PainDocPage} from '../pages/paindoc/paindoc';
 import { ProfilPage} from '../pages/profil/profil';
@@ -21,7 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     InterferencePage,
-    //LoginPage,
+    LoginPage,
     OverviewPage,
     PainDocPage,
     ProfilPage,
@@ -38,7 +38,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     InterferencePage,
-    //LoginPage,
+    LoginPage,
     OverviewPage,
     PainDocPage,
     ProfilPage,

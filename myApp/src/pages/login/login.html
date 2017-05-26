@@ -1,4 +1,4 @@
-<!-- <ion-header>
+<ion-header>
   <ion-navbar>
     <ion-title>Login</ion-title>
   </ion-navbar>
@@ -6,5 +6,20 @@
 
 <ion-content padding>
   <h3>Welcome to miDoDoku</h3>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
   <button ion-button full id="LoginButton" (click)="login()">Login</button>
-</ion-content> -->
+</ion-content>
