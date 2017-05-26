@@ -39,7 +39,7 @@ constructor(public navCtrl: NavController) {
      // ADD : END
 
 
-    //this.navCtrl.push(HomePage);
+    this.navCtrl.push(HomePage);
   }
 
 }
