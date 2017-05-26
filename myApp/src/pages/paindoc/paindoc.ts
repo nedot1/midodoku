@@ -8,9 +8,18 @@ import { InterferencePage} from '../interference/interference';
   selector: 'page-paindoc',
   templateUrl: 'paindoc.html'
 })
+
 export class PainDocPage {
 
+now : any = new Date();
+
 constructor(public navCtrl: NavController) {
+
+  // ADD two hours
+
+  this.now.setHours(this.now.getHours() + 2)
+  this.now = this.now.toISOString();
+  //console.info(this.now);
 
   }
 

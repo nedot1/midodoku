@@ -11,7 +11,7 @@
   </div>
   <ion-item>
   <ion-label>Datum und Zeit</ion-label>
-  <ion-datetime displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+  <ion-datetime displayFormat="DD.MM.YYYY HH:mm" [(ngModel)]="myDate" min="{{now}}" cancelText="Abbrechen" doneText="Speichern"></ion-datetime>
 </ion-item>
   <ion-item>
     <ion-label>Schmerzort</ion-label>
