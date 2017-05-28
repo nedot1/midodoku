@@ -3,6 +3,8 @@ import { NavController} from 'ionic-angular';
 import { PainDocPage} from '../paindoc/paindoc';
 import { OverviewPage} from '../overview/overview';
 import { StatisticPage} from '../statistic/statistic';
+import { LoginPage} from '../login/login';
+import {MidataService} from '../../providers/MidataService';
 
 @Component({
   selector: 'page-home',
@@ -10,10 +12,11 @@ import { StatisticPage} from '../statistic/statistic';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private midataService: MidataService) {
+   if(!midataService.getisAuth())
+       navCtrl.setRoot(LoginPage);
+  }
 
-          //this.navCtrl.push(PainDocPage);
-      }
   pushPainDocPage(){
     this.navCtrl.push(PainDocPage);
   }

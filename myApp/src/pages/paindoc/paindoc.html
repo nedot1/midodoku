@@ -69,7 +69,7 @@
     </table>
   </div>
 <ion-item>
-  <ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="painValue" color="secondary">
+  <ion-range min="0" max="10" step="1" pin="true"[(ngModel)]="painValue" (change)="onChange()" color="secondary">
     <ion-label range-left>0</ion-label>
     <ion-label range-right>10</ion-label>
   </ion-range>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { HomePage} from '../home/home';
 import { InterferencePage} from '../interference/interference';
@@ -17,7 +17,7 @@ painValue: number = 0;
 painLocation : string;
 painSensation : string;
 
-constructor(public navCtrl: NavController) {
+constructor(public navCtrl: NavController, private zone: NgZone) {
 
   // ADD two hours
 
@@ -34,10 +34,15 @@ constructor(public navCtrl: NavController) {
         },(error)=> {
             console.log('There was an error!', error)
         });
-
-
-
   }
+
+  onChange(){
+    console.log('UI has refreshed');
+    this.zone.run(() => {
+            console.log('UI has refreshed');
+    });
+  }
+
 
   pushInterferencePage(){
     this.savePain()
