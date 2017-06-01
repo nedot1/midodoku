@@ -28,6 +28,7 @@ constructor(public navCtrl: NavController, private ngZone: NgZone, private midat
       midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
 
       midata = this.midataService.getMidata();
+      this.update();
 
   }
 
