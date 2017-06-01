@@ -25,11 +25,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      if(!midataService.getisAuth()){
-        this.rootPage = LoginPage;
-      }else{
-        this.rootPage = TabsPage;
-      }
+
+      this.rootPage = TabsPage;
+
+      // if(!midataService.getisAuth()){
+      //   this.rootPage = LoginPage;
+      // }else{
+      //   this.rootPage = TabsPage;
+      // }
 
       });
 

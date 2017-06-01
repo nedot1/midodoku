@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, ViewController } from 'ionic-angular';
 import {HomePage} from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import {Midata} from 'midata';
@@ -14,12 +14,10 @@ let midata: Midata;
 })
 export class LoginPage {
 
-
   username : string;
   password : string;
 
-
-  constructor(private navCtrl: NavController, public menu: MenuController, private midataService: MidataService) {
+  constructor(private navCtrl: NavController, public menu: MenuController, private midataService: MidataService, public viewCtrl: ViewController) {
       //Create new MIDATA-Object
      midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
      this.navCtrl = navCtrl;
@@ -42,12 +40,17 @@ export class LoginPage {
     midata.login('developer@midodoku.ch', 'Test1234').then(() => {
       console.info('User id:', midata.user.id);
       this.midataService.setisAuth(true);
-      this.navCtrl.setRoot(TabsPage);
+      //this.navCtrl.setRoot(TabsPage);
+      this.dismiss();
     },(error)=> {
 	      console.log('There was an error!', error);
     });
-
-
   }
+
+  dismiss() {
+       this.viewCtrl.dismiss();
+  }
+
+
 
 }

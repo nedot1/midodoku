@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
+import { NavController, ModalController} from 'ionic-angular';
 import { PainDocPage} from '../paindoc/paindoc';
 import { OverviewPage} from '../overview/overview';
 import { StatisticPage} from '../statistic/statistic';
@@ -12,10 +12,18 @@ import {MidataService} from '../../providers/MidataService';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private midataService: MidataService) {
+  constructor(public navCtrl: NavController, private midataService: MidataService, public modalCtrl: ModalController) {
    if(!midataService.getisAuth())
-       navCtrl.setRoot(LoginPage);
+       this.showLogin();
+   //navCtrl.setRoot(LoginPage);
   }
+
+
+  showLogin() {
+   let loginModal = this.modalCtrl.create(LoginPage);
+   loginModal.present();
+}
+
 
   pushPainDocPage(){
     this.navCtrl.push(PainDocPage);
@@ -28,5 +36,4 @@ export class HomePage {
   pushStatisticPage(){
     this.navCtrl.push(StatisticPage);
   }
-
-    }
+}
