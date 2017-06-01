@@ -28,14 +28,13 @@ constructor(public navCtrl: NavController, private ngZone: NgZone, private midat
       midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
 
       midata = this.midataService.getMidata();
-      this.update();
 
+      this.update();
   }
 
 
   update(){
       midata.search('Observation', {code: "http://loinc.org|72514-3"}).then((resources)=> {
-
         this.ngZone.run(() => {
 
           // CLEAR ARRAY
@@ -49,10 +48,14 @@ constructor(public navCtrl: NavController, private ngZone: NgZone, private midat
             var resourceDate = new Date(resources[i].toJson().effectiveDateTime);
 
             this.day = resourceDate.getDate();
+            this.day = this.day <= 9 ? "0" + this.day : this.day;
+
             this.month = resourceDate.getMonth()+1;
+            this.month = this.month <= 9 ? "0" + this.month : this.month;
+
             this.year = resourceDate.getFullYear();
             this.hours = resourceDate.getHours();
-            this.minutes = resourceDate.getSeconds();
+            this.minutes = resourceDate.getMinutes();
             this.minutes = this.minutes <= 9 ? "0" + this.minutes : this.minutes;
 
             this.entries.push({
@@ -69,11 +72,7 @@ constructor(public navCtrl: NavController, private ngZone: NgZone, private midat
                 enjoyment: '5',
                 score: '5'
             });
-
           }
-
-
-
         });
       });
   }
