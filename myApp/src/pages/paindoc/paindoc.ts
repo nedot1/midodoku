@@ -4,6 +4,7 @@ import { HomePage} from '../home/home';
 import { InterferencePage} from '../interference/interference';
 import {Midata, Resource} from 'midata';
 let midata: Midata;
+import {MidataService} from '../../providers/MidataService';
 
 @Component({
   selector: 'page-paindoc',
@@ -17,7 +18,7 @@ painValue: number = 0;
 painLocation : string;
 painSensation : string;
 
-constructor(public navCtrl: NavController, private zone: NgZone) {
+constructor(public navCtrl: NavController, private zone: NgZone, private midataService: MidataService) {
 
   // ADD two hours
 
@@ -28,12 +29,7 @@ constructor(public navCtrl: NavController, private zone: NgZone) {
   // Create MIDATA-Object
         midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
 
-        // Login
-        midata.login('developer@midodoku.ch', 'Test1234').then(() => {
-          console.info('Logged in');
-        },(error)=> {
-            console.log('There was an error!', error)
-        });
+        midata = this.midataService.getMidata(); 
   }
 
   onChange(){

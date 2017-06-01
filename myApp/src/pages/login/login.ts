@@ -40,8 +40,10 @@ export class LoginPage {
     midata.login('developer@midodoku.ch', 'Test1234').then(() => {
       console.info('User id:', midata.user.id);
       this.midataService.setisAuth(true);
+      this.midataService.setMidata(midata);
       //this.navCtrl.setRoot(TabsPage);
       this.dismiss();
+      console.info(this.midataService.getMidata());
     },(error)=> {
 	      console.log('There was an error!', error);
     });

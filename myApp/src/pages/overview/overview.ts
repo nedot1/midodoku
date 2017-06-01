@@ -3,6 +3,7 @@ import { NavController} from 'ionic-angular';
 import { HomePage} from '../home/home';
 import { Midata } from 'midata';
 let midata : Midata;
+import {MidataService} from '../../providers/MidataService';
 
 
 @Component({
@@ -22,16 +23,11 @@ export class OverviewPage {
   hours: any;
   minutes: any;
 
-constructor(public navCtrl: NavController, private ngZone: NgZone) {
+constructor(public navCtrl: NavController, private ngZone: NgZone, private midataService: MidataService) {
 
       midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
 
-      midata.login('developer@midodoku.ch', 'Test1234').then(() => {
-        console.info('Logged in');
-        this.update();
-      },(error)=> {
-          console.log('There was an error!', error)
-      });
+      midata = this.midataService.getMidata();
 
   }
 
