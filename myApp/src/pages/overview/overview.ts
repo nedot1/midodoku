@@ -13,7 +13,7 @@ export class OverviewPage {
 
   entries: Array<{date: string, painLocation: string, painSensation: string, painValue: string,
   activity: string, mood: string, walkingAbility: string, work: string, socialLife: string, sleep: string,
-  enjoyment: string
+  enjoyment: string, score: string
   }>;
 
   day: any;
@@ -52,7 +52,7 @@ constructor(public navCtrl: NavController, private ngZone: NgZone) {
             var resourceDate = new Date(resources[i].toJson().effectiveDateTime);
 
             this.day = resourceDate.getDate();
-            this.month = resourceDate.getMonth();
+            this.month = resourceDate.getMonth()+1;
             this.year = resourceDate.getFullYear();
             this.hours = resourceDate.getHours();
             this.minutes = resourceDate.getSeconds();
@@ -69,7 +69,8 @@ constructor(public navCtrl: NavController, private ngZone: NgZone) {
                 work: '5',
                 socialLife: '5',
                 sleep: '5',
-                enjoyment: '5'
+                enjoyment: '5',
+                score: '5'
             });
 
           }
