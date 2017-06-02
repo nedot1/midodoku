@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
+import { LoginPage} from '../login/login';
 
 
 @Component({
@@ -10,8 +11,9 @@ export class SettingsPage {
 
   constructor(public navCtrl: NavController) {
 
-          //this.navCtrl.push(PainDocPage);
-      }
+  }
 
-
+    pushLoginPage(){
+      this.navCtrl.push(LoginPage);
     }
+}
