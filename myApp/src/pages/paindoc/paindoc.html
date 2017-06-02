@@ -15,7 +15,7 @@
 </ion-item>
   <ion-item>
     <ion-label>Schmerzort</ion-label>
-    <ion-select [(ngModel)]="painLocation">
+    <ion-select [(ngModel)]="painLocation" cancelText="Abbrechen">
       <ion-option value="ArmLeft">Arm links</ion-option>
       <ion-option value="ArmRight">Arm rechts</ion-option>
       <ion-option value="Stomach">Bauch</ion-option>
@@ -33,7 +33,7 @@
   </ion-item>
 <ion-item>
   <ion-label>Schmerzart</ion-label>
-  <ion-select [(ngModel)]="painSensation" multiple="true">
+  <ion-select [(ngModel)]="painSensation" multiple="true" cancelText="Abbrechen">
     <ion-option>bohrend</ion-option>
     <ion-option>brennend</ion-option>
     <ion-option>drückend</ion-option>
