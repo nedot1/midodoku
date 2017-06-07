@@ -35,8 +35,10 @@ import {MidataService} from '../providers/MidataService';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Zurück',
+    },
+  )],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -56,5 +58,6 @@ import {MidataService} from '../providers/MidataService';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
+
 })
 export class AppModule {}
