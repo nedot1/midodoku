@@ -11,7 +11,7 @@
   </div>
   <ion-item>
   <ion-label>Datum und Zeit</ion-label>
-  <ion-datetime displayFormat="DDD DD. MMM YYYY HH:mm" [(ngModel)]="date" min="2000-01-01" max="2100-01-01" cancelText="Abbrechen" doneText="Speichern"
+  <ion-datetime displayFormat="DDD DD. MMM YYYY HH:mm" [(ngModel)]="date" min="2000-01-01" max="{{date}}"cancelText="Abbrechen" doneText="Speichern"
   monthShortNames="Jan, Feb, Mrz, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez"
   dayShortNames="Mo, Di, Mi, Do, Fr, Sa, So"></ion-datetime>
 </ion-item>
