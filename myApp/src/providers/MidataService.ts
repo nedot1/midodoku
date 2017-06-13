@@ -43,5 +43,10 @@ saveBundle(){
   midata.save(painBundle);
 }
 
+logout(){
+  this.setMidata(null);
+  this.setisAuth(false);
+}
+
 
 }

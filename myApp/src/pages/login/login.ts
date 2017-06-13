@@ -23,30 +23,28 @@ export class LoginPage {
      this.navCtrl = navCtrl;
   }
 
-
   login(){
     console.info("Username : " + this.username);
     console.info("Password : " + this.password);
 
-
-    // midata.login(this.username, this.password).then(() => {
-    //   console.info('User id:', midata.user.id);
-    //   this.navCtrl.setRoot(HomePage);
-    // },(error)=> {
-	  //     console.log('There was an error!', error);
-    // });
-    //
-
-    midata.login('developer@midodoku.ch', 'Test1234').then(() => {
+    midata.login(this.username, this.password).then(() => {
       console.info('User id:', midata.user.id);
-      this.midataService.setisAuth(true);
-      this.midataService.setMidata(midata);
-      //this.navCtrl.setRoot(TabsPage);
-      this.dismiss();
-      console.info(this.midataService.getMidata());
+        this.midataService.setisAuth(true);
+        this.midataService.setMidata(midata);
+        this.dismiss();
     },(error)=> {
 	      console.log('There was an error!', error);
     });
+
+    // midata.login('developer@midodoku.ch', 'Test1234').then(() => {
+    //   console.info('User id:', midata.user.id);
+    //   this.midataService.setisAuth(true);
+    //   this.midataService.setMidata(midata);
+    //   //this.navCtrl.setRoot(TabsPage);
+    //   this.dismiss();
+    // },(error)=> {
+	  //     console.info('There was an error!', error);
+    // });
   }
 
   dismiss() {
