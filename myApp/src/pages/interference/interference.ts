@@ -25,14 +25,10 @@ export class InterferencePage {
   // ADD : END
 
 constructor(public navCtrl: NavController, private zone: NgZone, private midataService: MidataService) {
-
-  midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
-
-  midata = this.midataService.getMidata();
   }
 
-  pushHomePage(){
-    this.saveInterference()
+  abortAction(){
+    this.midataService.flushBundle();
     this.navCtrl.push(HomePage);
   }
 
@@ -118,5 +114,12 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
       this.midataService.addEntryToBundle(sleepObservation);
       this.midataService.addEntryToBundle(vitalityObservation);
 
+      this.midataService.saveBundle().then(_ => {
+        console.log("Speichern erfolgreich");
+        this.midataService.flushBundle();
+        this.navCtrl.push(HomePage);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 }

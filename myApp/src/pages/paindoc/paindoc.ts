@@ -25,12 +25,6 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
   this.date.setHours(this.date.getHours() + 2)
   this.date = this.date.toISOString();
-  //console.info(this.now);
-
-  // Create MIDATA-Object
-        midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
-
-        midata = this.midataService.getMidata();
   }
 
   onChange(){

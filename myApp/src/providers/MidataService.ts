@@ -4,16 +4,20 @@ import 'rxjs/add/operator/map';
 import {Midata, Bundle, Resource} from 'midata';
 
 // Create a MIDATA-Object
-let midata: Midata;
-let painBundle: Bundle;
 
 @Injectable()
 export class MidataService {
 
   isAuth: boolean = false;
+  midata: Midata;
+  painBundle: Bundle;
 
   constructor() {
-    painBundle = new Bundle("transaction");
+    this.midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
+  }
+
+  getMidata(){
+    return this.midata;
   }
 
   getisAuth(){
@@ -25,28 +29,32 @@ export class MidataService {
   }
 
 setMidata(midataToken: Midata){
-  midata = midataToken;
+  this.midata = midataToken;
 }
 
-getMidata(){
-  return midata;
+flushBundle(){
+  this.painBundle = undefined;
 }
+
 
 addEntryToBundle(observation: Resource) {
-  painBundle.addEntry("GET", "Observation", observation).then((_) => {
-    console.log(painBundle);
-  });
+if(typeof this.painBundle != "undefined"){
+  this.painBundle.addEntry("POST", "Observation", observation);
+} else {
+  console.log("bundle not set");
+  this.painBundle = new Bundle("transaction");
+  this.painBundle.addEntry("POST", "Observation", observation);
+}
 
 }
 
 saveBundle(){
-  midata.save(painBundle);
+  return this.midata.save(this.painBundle);
 }
 
 logout(){
   this.setMidata(null);
   this.setisAuth(false);
 }
-
 
 }
