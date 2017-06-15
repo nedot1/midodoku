@@ -3,7 +3,6 @@ import { NavController} from 'ionic-angular';
 import { HomePage} from '../home/home';
 import { InterferencePage} from '../interference/interference';
 import {Midata, Resource, Observation, Survey} from 'midata';
-let midata: Midata;
 import {MidataService} from '../../providers/MidataService';
 import * as GLOBALS from '../../typings/globals'
 
@@ -25,6 +24,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
   this.date.setHours(this.date.getHours() + 2)
   this.date = this.date.toISOString();
+  
   }
 
   onChange(){
@@ -161,9 +161,11 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
   savePain(){
 
+      this.midataService.setTimeStamp(this.date);
+
        let painValueObservation : Observation;
 
-       painValueObservation = new Observation(new Date(), {"coding": [
+       painValueObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
            {
                "system": "http://loinc.org",
                "code": '72514-3',
@@ -187,7 +189,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
        let painSensationObservation : Observation;
 
-       painSensationObservation = new Observation(new Date(), {"coding": [
+       painSensationObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
       {
          "system": "http://snomed.info/sct",
          "code": "410720000",

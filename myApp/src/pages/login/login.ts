@@ -18,12 +18,11 @@ export class LoginPage {
   password : string;
 
   constructor(private navCtrl: NavController, public menu: MenuController, private midataService: MidataService, public viewCtrl: ViewController) {
-      //Create new MIDATA-Object
-     midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
      this.navCtrl = navCtrl;
   }
 
   login(){
+    let midata = this.midataService.getMidata();
     console.info("Username : " + this.username);
     console.info("Password : " + this.password);
 
@@ -31,6 +30,7 @@ export class LoginPage {
       console.info('User id:', midata.user.id);
         this.midataService.setisAuth(true);
         this.midataService.setMidata(midata);
+        console.log("OK");
         this.dismiss();
     },(error)=> {
 	      console.log('There was an error!', error);

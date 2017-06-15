@@ -2,7 +2,6 @@ import { Component, NgZone} from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { HomePage} from '../home/home';
 import { Midata } from 'midata';
-let midata : Midata;
 import {MidataService} from '../../providers/MidataService';
 
 
@@ -26,187 +25,173 @@ export class OverviewPage {
 
 constructor(public navCtrl: NavController, private ngZone: NgZone, private midataService: MidataService) {
 
+          // initialize clean array
+          // here we will store our summarised entries...
+          let entries = [];
+
   }
 
-
   ionViewWillEnter(){
+    // invoke this.update on ViewWillEnter hook
     this.update();
   }
 
-
-  update(){
-      this.midataService.getMidata().search('Observation', {_sort : "effectiveDateTime"}).then((resources : any)=> {
+  private update(){
+    // @wya3
+    // NOTE: this approach ought not be used generally as it serves the current needs 
+    // (display of records in a consolidated manner)
+    // TODO: Query the api accordingly...
+    this.midataService.getMidata().search('Observation', {_sort : "effectiveDateTime"}).then((resources : any)=> {
         this.ngZone.run(() => {
 
-          // CLEAR ARRAY
+          // some variables for convenience...
           this.entries = [];
+          let iMin = 0;
+          let iMax = 9;
+          let spliced = [];
 
-          console.log(resources);
-
-          // GO THROUGH OBJECT
-          for(let resource of resources){
-
-            console.log(resource);
-            console.log(resource.toJson().effectiveDateTime);
-            console.log(resource.toJson().code.coding[0].code);
-
-
-            var resourceDate = new Date(resource.toJson().effectiveDateTime);
-
-            this.day = resourceDate.getDate();
-            this.day = this.day <= 9 ? "0" + this.day : this.day;
-
-            this.month = resourceDate.getMonth()+1;
-            this.month = this.month <= 9 ? "0" + this.month : this.month;
-
-            this.year = resourceDate.getFullYear();
-            this.hours = resourceDate.getHours();
-            this.minutes = resourceDate.getMinutes();
-            this.minutes = this.minutes <= 9 ? "0" + this.minutes : this.minutes;
-
-            //this.seconds = resourceDate.getSeconds();
-          //  this.seconds = this.seconds <= 9 ? "0" + this.seconds : this.seconds;
-
-            var arrayEntry : any = {
-              _date : this.year + "." + this.month + "." + this.day + " " + this.hours + ":" + this.minutes,
-              date: this.day + "." + this.month + "." + this.year + " " + this.hours + ":" + this.minutes,
-              painLocation: "string",
-              painSensation: "string",
-              painValue: "string",
-              activity: -1,
-              mood: -1,
-              walkingAbility: -1,
-              work: -1,
-              socialLife: -1,
-              sleep: -1,
-              enjoyment: -1,
-              score: "string"
-            };
-
-
-            if(resource.toJson().code.coding[0].code === "77566-8"){
-              console.log("Aktivität gefunden");
-              // activity
-              if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                arrayEntry.activity = resource.toJson().valueQuantity.value;
-              } else {
-                //arrayEntry.activity = -1;
-              }
-            } else if(resource.toJson().code.coding[0].code === "77572-6"){
-                          console.log("Lebensfreude gefunden");
-                          // enjoyment
-                          if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                            arrayEntry.enjoyment = resource.toJson().valueQuantity.value;
-                          } else {
-                            //arrayEntry.activity = -1;
-                          }
-                        } else if(resource.toJson().code.coding[0].code === "77567-6"){
-                                      console.log("Laune gefunden");
-                                      // enjoyment
-                                      if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                        arrayEntry.mood = resource.toJson().valueQuantity.value;
-                                      } else {
-                                        //arrayEntry.activity = -1;
-                                      }
-                                    } else if(resource.toJson().code.coding[0].code === "77571-8"){
-                                                  console.log("Schlafen gefunden");
-                                                  // enjoyment
-                                                  if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                                    arrayEntry.sleep = resource.toJson().valueQuantity.value;
-                                                  } else {
-                                                    //arrayEntry.activity = -1;
-                                                  }
-                                                } else if(resource.toJson().code.coding[0].code === "77568-4"){
-                                                              console.log("Gehen gefunden");
-                                                              // enjoyment
-                                                              if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                                                arrayEntry.walkingAbility = resource.toJson().valueQuantity.value;
-                                                              } else {
-                                                                //arrayEntry.activity = -1;
-                                                              }
-                                                            } else if(resource.toJson().code.coding[0].code === "77569-2"){
-                                                                          console.log("Normal arbeiten gefunden");
-                                                                          // enjoyment
-                                                                          if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                                                            arrayEntry.work = resource.toJson().valueQuantity.value;
-                                                                          } else {
-                                                                            //arrayEntry.activity = -1;
-                                                                          }
-                                                                        } else if(resource.toJson().code.coding[0].code === "77570-0"){
-                                                                                      console.log("andere Leute gefunden");
-                                                                                      // enjoyment
-                                                                                      if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                                                                        arrayEntry.socialLife = resource.toJson().valueQuantity.value;
-                                                                                      } else {
-                                                                                        //arrayEntry.activity = -1;
-                                                                                      }
-                                                                                    } else if(resource.toJson().code.coding[0].code === "410720000"){
-
-                                                                                                  console.log("Sensation gefunden");
-
-                                                                                                  // enjoyment
-                                                                                                  if(resource.toJson().bodySite && resource.toJson().bodySite.coding[0].display){
-                                                                                                    arrayEntry.painLocation = resource.toJson().bodySite.coding[0].display;
-                                                                                                  }
-                                                                                                  if(resource.toJson().component && resource.toJson().component[0].code.coding){
-                                                                                                    var painSensation: string = ""
-                                                                                                    for(let code of resource.toJson().component[0].code.coding){
-                                                                                                      painSensation = painSensation + " " + code.display;
-                                                                                                    }
-                                                                                                    arrayEntry.painSensation = painSensation;
-                                                                                                  }
-                                                                                                } else if(resource.toJson().code.coding[0].code === "72514-3"){
-                                                                                                              console.log("Schmerzstärke gefunden");
-                                                                                                              if(resource.toJson().valueQuantity && resource.toJson().valueQuantity.value){
-                                                                                                                arrayEntry.painValue = resource.toJson().valueQuantity.value
-
-                                                                                                            }
-                                                                                                          }
-
-
-            this.entries.push(arrayEntry);
-        //    console.log(this.entries);
+          for(var _i = 0; _i < (resources.length / 9); _i++){
+              spliced.push(resources.slice(iMin, iMax));
+              iMin = iMin + 9;
+              iMax = iMax + 9;
             }
 
-            var consolidatedArray : any = {
-              _date : this.year + "." + this.month + "." + this.day + " " + this.hours + ":" + this.minutes,
-              date: this.day + "." + this.month + "." + this.year + " " + this.hours + ":" + this.minutes,
+              console.log("Spliced array:");
+              console.log(spliced);
+
+              for (var _i = 0; _i < spliced.length; _i++){
+
+            // definition of skeleton...
+            // this will temporarily hold our entries..
+            var arrayEntry : any = {
+              _date : Date,
+              date: "string",
               painLocation: "string",
               painSensation: "string",
-              painValue: "string",
-              activity: -1,
-              mood: -1,
-              walkingAbility: -1,
-              work: -1,
-              socialLife: -1,
-              sleep: -1,
-              enjoyment: -1,
-              score: "string"
+              painValue: 0,
+              activity: 0,
+              mood: 0,
+              walkingAbility: 0,
+              work: 0,
+              socialLife: 0,
+              sleep: 0,
+              enjoyment: 0,
+              score: 0
             };
+            
+              for(var _j = 0; _j < spliced[_i].length; _j++){
+              
+              // finally on the object...
 
+              // timestamp is always the same in here, we can neglect the allocation
+              var resourceDate = new Date(spliced[_i][_j].toJson().effectiveDateTime);
+              this.day = resourceDate.getDate();
+              this.day = this.day <= 9 ? "0" + this.day : this.day;
+              this.month = resourceDate.getMonth()+1;
+              this.month = this.month <= 9 ? "0" + this.month : this.month;
+              this.year = resourceDate.getFullYear();
+              this.hours = resourceDate.getHours() + -2;
+              this.minutes = resourceDate.getMinutes();
+              this.minutes = this.minutes <= 9 ? "0" + this.minutes : this.minutes;
 
+              // hidden _date value, this value is only used in order to sort the array
+              // it won't be displayed
+              arrayEntry._date = resourceDate;
 
+              // the date to display...
+              arrayEntry.date = this.day + "." + this.month + "." + this.year + ", " + this.hours +":"+ this.minutes
 
-/*
-            this.entries.push({
-                date: this.day +"."+this.month+"."+this.year + " " + this.hours + ":" + this.minutes,
-                painLocation: 'Fuss links ',
-                painSensation: 'Brennend',
-                painValue: resource.toJson().valueQuantity.value,
-                activity: '5',
-                mood: '5',
-                walkingAbility: '5',
-                work: '5',
-                socialLife: '5',
-                sleep: '5',
-                enjoyment: '5',
-                score: '5'
-            });}*/
+              // fetch and allocate entries to the skeleton according to their codes
 
+                if(spliced[_i][_j].toJson().code.coding[0].code === "77566-8"){
+                  console.log("found 77566-8 // activity");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.activity = spliced[_i][_j].toJson().valueQuantity.value;
+                  }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77572-6"){
+                  console.log("found 77572-6 // enjoyment");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.enjoyment = spliced[_i][_j].toJson().valueQuantity.value;
+                  }
+              }
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77567-6"){
+                  console.log("found 77567-6 // mood");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.mood = spliced[_i][_j].toJson().valueQuantity.value;
+                  }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77571-8"){
+                  console.log("found 77571-8 //  sleep");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.sleep = spliced[_i][_j].toJson().valueQuantity.value;
+                  }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77568-4"){
+                  console.log("found 77568-4 // walkingAbility");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.walkingAbility = spliced[_i][_j].toJson().valueQuantity.value;
+                  }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77569-2"){
+                  console.log("found 77569-2 // work ");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.work = spliced[_i][_j].toJson().valueQuantity.value;
+                }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "77570-0"){
+                  console.log("found 77570-0 // socialLife");
+                  if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                  arrayEntry.socialLife = spliced[_i][_j].toJson().valueQuantity.value;
+                }  
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "410720000"){
+                 console.log("found 410720000 (SNOMED CT) // painLocation & painSensation");
+                    if(spliced[_i][_j].toJson().bodySite && spliced[_i][_j].toJson().bodySite.coding[0].display){
+                    arrayEntry.painLocation = spliced[_i][_j].toJson().bodySite.coding[0].display;
+                    }
+                    if(spliced[_i][_j].toJson().component && spliced[_i][_j].toJson().component[0].code.coding){
+                    var painSensation: string = ""
+                      for(let code of spliced[_i][_j].toJson().component){
+                      painSensation = painSensation + " " + code.code.coding[0].display;
+                    }
+                    arrayEntry.painSensation = painSensation;
+                    }
+              } 
+                else if(spliced[_i][_j].toJson().code.coding[0].code === "72514-3"){
+                console.log("found 72514-3 // painValue");
+                if(spliced[_i][_j].toJson().valueQuantity && spliced[_i][_j].toJson().valueQuantity.value){
+                arrayEntry.painValue = spliced[_i][_j].toJson().valueQuantity.value
+              }
+          }
 
+      } // inner loop closure
 
-        });
-      });
+      // score value
+      arrayEntry.score = Math.round((arrayEntry.activity + 
+                          arrayEntry.mood + 
+                          arrayEntry.walkingAbility + 
+                          arrayEntry.work + 
+                          arrayEntry.socialLife + 
+                          arrayEntry.sleep + 
+                          arrayEntry.enjoyment) / 7);
+
+      
+
+      // push the array entry into the entries 
+      this.entries.push(arrayEntry);
+      
+
+  } // outer loop closure
+
+    // finally, sort the array so it is displayed chronologically...
+    console.log("The unsorted array:");
+    console.log(this.entries);
+    this.entries.sort((a,b) => { return new Date(b._date).getTime() - new Date(a._date).getTime() });
+    console.log("The sorted one:");
+    console.log(this.entries);
+  })
+  })
   }
 
 }

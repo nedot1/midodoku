@@ -3,7 +3,6 @@ import { NavController} from 'ionic-angular';
 import { PainDocPage} from '../paindoc/paindoc';
 import { HomePage} from '../home/home';
 import {Midata, Resource, Observation, Survey} from 'midata';
-let midata: Midata;
 import {MidataService} from '../../providers/MidataService';
 
 
@@ -36,7 +35,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let activityObservation : Observation;
 
-      activityObservation = new Observation(new Date(), {"coding": [
+      activityObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77566-8',
@@ -47,7 +46,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let moodObservation : Observation;
 
-      moodObservation = new Observation(new Date(), {"coding": [
+      moodObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77567-6',
@@ -57,7 +56,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let walkingAbilityObservation : Observation;
 
-      walkingAbilityObservation = new Observation(new Date(), {"coding": [
+      walkingAbilityObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77568-4',
@@ -67,7 +66,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let workObservation : Observation;
 
-      workObservation = new Observation(new Date(), {"coding": [
+      workObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77569-2',
@@ -77,7 +76,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let socialLifeObservation : Observation;
 
-      socialLifeObservation = new Observation(new Date(), {"coding": [
+      socialLifeObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77570-0',
@@ -87,7 +86,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let sleepObservation : Observation;
 
-      sleepObservation = new Observation(new Date(), {"coding": [
+      sleepObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77571-8',
@@ -97,7 +96,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
 
       let vitalityObservation : Observation;
 
-      vitalityObservation = new Observation(new Date(), {"coding": [
+      vitalityObservation = new Observation(this.midataService.getTimestamp(), {"coding": [
         {
           "system": "http://loinc.org",
           "code": '77572-6',
@@ -117,6 +116,7 @@ constructor(public navCtrl: NavController, private zone: NgZone, private midataS
       this.midataService.saveBundle().then(_ => {
         console.log("Speichern erfolgreich");
         this.midataService.flushBundle();
+        this.midataService.flushTimestamp();
         this.navCtrl.push(HomePage);
       }).catch((error) => {
         console.log(error);

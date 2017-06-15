@@ -11,6 +11,7 @@ export class MidataService {
   isAuth: boolean = false;
   midata: Midata;
   painBundle: Bundle;
+  entryTimestamp: Date = new Date();
 
   constructor() {
     this.midata = new Midata('https://test.midata.coop:9000', 'miDoDoku', 'Test12345');
@@ -34,6 +35,19 @@ setMidata(midataToken: Midata){
 
 flushBundle(){
   this.painBundle = undefined;
+}
+
+setTimeStamp(tS : string){
+  this.entryTimestamp = new Date(tS);
+}
+
+getTimestamp(): Date{
+  console.log(this.entryTimestamp);
+  return this.entryTimestamp;
+}
+
+flushTimestamp(){
+  this.entryTimestamp = undefined;
 }
 
 
